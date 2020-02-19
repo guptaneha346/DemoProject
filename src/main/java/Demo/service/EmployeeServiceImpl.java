@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements EmployeeService {
 
   public static final String JSON_CURRENT_PAGE="currentPage";
   public static final String JSON_NUM_PER_PAGE="numPerPage";
@@ -25,7 +25,12 @@ public class EmployeeServiceImpl {
   public static final int DEFAULT_NUM_PER_PAGE=5;
 
   @Autowired
-  EmployeeRepository repo;
+   EmployeeRepository repo;
+
+  @Autowired
+  public EmployeeServiceImpl(EmployeeRepository repo
+                          ) {
+    this.repo = repo;}
 
   public Response create(Employee emp){
     if(emp.getName()==null || emp.getName().isEmpty()){
